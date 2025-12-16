@@ -1,0 +1,68 @@
+{
+    "curriculum_value": {
+        "lesson_num": 4
+    },
+    "Walker": {
+        "checkpoints": [
+            {
+                "steps": 3999800,
+                "file_path": "results\\FullCuricullum\\Walker\\Walker-3999800.onnx",
+                "reward": 237.08177226522693,
+                "creation_time": 1765579098.208299,
+                "auxillary_file_paths": [
+                    "results\\FullCuricullum\\Walker\\Walker-3999800.pt"
+                ]
+            },
+            {
+                "steps": 4499800,
+                "file_path": "results\\FullCuricullum\\Walker\\Walker-4499800.onnx",
+                "reward": 366.5519443088108,
+                "creation_time": 1765580124.7098606,
+                "auxillary_file_paths": [
+                    "results\\FullCuricullum\\Walker\\Walker-4499800.pt"
+                ]
+            },
+            {
+                "steps": 4999800,
+                "file_path": "results\\FullCuricullum\\Walker\\Walker-4999800.onnx",
+                "reward": 384.5573001984627,
+                "creation_time": 1765581215.8104737,
+                "auxillary_file_paths": [
+                    "results\\FullCuricullum\\Walker\\Walker-4999800.pt"
+                ]
+            },
+            {
+                "steps": 5499800,
+                "file_path": "results\\FullCuricullum\\Walker\\Walker-5499800.onnx",
+                "reward": 434.50664498465403,
+                "creation_time": 1765582300.0602741,
+                "auxillary_file_paths": [
+                    "results\\FullCuricullum\\Walker\\Walker-5499800.pt"
+                ]
+            },
+            {
+                "steps": 5980800,
+                "file_path": "results\\FullCuricullum\\Walker\\Walker-5980800.onnx",
+                "reward": 450.4779624938965,
+                "creation_time": 1765583289.303636,
+                "auxillary_file_paths": [
+                    "results\\FullCuricullum\\Walker\\Walker-5980800.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 5980800,
+            "file_path": "results\\FullCuricullum\\Walker.onnx",
+            "reward": 450.4779624938965,
+            "creation_time": 1765583289.303636,
+            "auxillary_file_paths": [
+                "results\\FullCuricullum\\Walker\\Walker-5980800.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.2.2+cpu"
+    }
+}

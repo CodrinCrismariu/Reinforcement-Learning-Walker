@@ -1,0 +1,68 @@
+{
+    "curriculum_value": {
+        "lesson_num": 5
+    },
+    "Walker": {
+        "checkpoints": [
+            {
+                "steps": 7999995,
+                "file_path": "results\\FullCuricullum512Brain\\Walker\\Walker-7999995.onnx",
+                "reward": -0.5694785405119712,
+                "creation_time": 1765600527.3421738,
+                "auxillary_file_paths": [
+                    "results\\FullCuricullum512Brain\\Walker\\Walker-7999995.pt"
+                ]
+            },
+            {
+                "steps": 8148985,
+                "file_path": "results\\FullCuricullum512Brain\\Walker\\Walker-8148985.onnx",
+                "reward": -0.4826827789862159,
+                "creation_time": 1765600908.7157898,
+                "auxillary_file_paths": [
+                    "results\\FullCuricullum512Brain\\Walker\\Walker-8148985.pt"
+                ]
+            },
+            {
+                "steps": 8499988,
+                "file_path": "results\\FullCuricullum512Brain\\Walker\\Walker-8499988.onnx",
+                "reward": -0.13503947175001796,
+                "creation_time": 1765601875.1899881,
+                "auxillary_file_paths": [
+                    "results\\FullCuricullum512Brain\\Walker\\Walker-8499988.pt"
+                ]
+            },
+            {
+                "steps": 8999994,
+                "file_path": "results\\FullCuricullum512Brain\\Walker\\Walker-8999994.onnx",
+                "reward": 0.8272397532780594,
+                "creation_time": 1765603215.2227917,
+                "auxillary_file_paths": [
+                    "results\\FullCuricullum512Brain\\Walker\\Walker-8999994.pt"
+                ]
+            },
+            {
+                "steps": 9048217,
+                "file_path": "results\\FullCuricullum512Brain\\Walker\\Walker-9048217.onnx",
+                "reward": 0.8015412792785844,
+                "creation_time": 1765603333.5569353,
+                "auxillary_file_paths": [
+                    "results\\FullCuricullum512Brain\\Walker\\Walker-9048217.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 9048217,
+            "file_path": "results\\FullCuricullum512Brain\\Walker.onnx",
+            "reward": 0.8015412792785844,
+            "creation_time": 1765603333.5569353,
+            "auxillary_file_paths": [
+                "results\\FullCuricullum512Brain\\Walker\\Walker-9048217.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.2.2+cpu"
+    }
+}

@@ -4,6 +4,8 @@ using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgentsExamples;
 using Unity.MLAgents.Sensors;
+using Unity.MLAgents.Policies;
+
 using BodyPart = Unity.MLAgentsExamples.BodyPart;
 using Random = UnityEngine.Random;
 
@@ -21,12 +23,54 @@ public class WalkerAgent : Agent
         set { m_TargetWalkingSpeed = Mathf.Clamp(value, .1f, m_maxWalkingSpeed); }
     }
 
+    public BehaviorParameters agentBehaviorParams;
+
     const float m_maxWalkingSpeed = 10; //The max walking speed
+
+    public Unity.InferenceEngine.ModelAsset recoveryModel;
+    public Unity.InferenceEngine.ModelAsset walkingModel;
+
+    // Call this method to switch to Model A
+    public void UseRecoveryModel()
+    {
+        // "YourBehaviorName" should match the name in the BehaviorParameters
+        SetModel("RecoveryBehavior", recoveryModel);
+    }
+
+    // Call this method to switch to Model B
+    public void UseWalkingModel()
+    {
+        SetModel("WalkingBehavior", walkingModel);
+    }
 
     //Should the agent sample a new goal velocity each episode?
     //If true, walkSpeed will be randomly set between zero and m_maxWalkingSpeed in OnEpisodeBegin()
     //If false, the goal velocity will be walkingSpeed
     public bool randomizeWalkSpeedEachEpisode;
+
+    public enum LearningStage
+    {
+        Easy = 0,
+        Medium = 1,
+        Hard = 2,
+        Walking = 3
+    }
+
+    [Header("Initialization")]
+    public LearningStage startingStage = LearningStage.Walking;
+    public bool terminateOnBodyPartContact = false;
+
+    [Tooltip("Maximum penalty per step for knees touching ground (scales with time)")]
+    public float maxKneeTouchPenalty = -5f;
+
+    [Tooltip("Ratio of gravity to compensate (0.0 = no assist, 0.5 = half weight)")]
+    public float currAssistForceRatio = 1f; // Can be controlled by Curriculum
+
+    [Header("Gait Rewards")]
+    public float oneFootReward = 0.05f;
+    public float doubleSupportPenalty = -0.05f;
+
+    float m_TotalMass;
 
     //The direction an agent will walk during training.
     private Vector3 m_WorldDirToWalk = Vector3.right;
@@ -63,6 +107,7 @@ public class WalkerAgent : Agent
     {
         m_OrientationCube = GetComponentInChildren<OrientationCubeController>();
         m_DirectionIndicator = GetComponentInChildren<DirectionIndicator>();
+        agentBehaviorParams = GetComponent<BehaviorParameters>();
 
         //Setup each body part
         m_JdController = GetComponent<JointDriveController>();
@@ -83,6 +128,13 @@ public class WalkerAgent : Agent
         m_JdController.SetupBodyPart(forearmR);
         m_JdController.SetupBodyPart(handR);
 
+        // Calculate Total Mass
+        m_TotalMass = 0f;
+        foreach (var bp in m_JdController.bodyPartsList)
+        {
+            m_TotalMass += bp.rb.mass;
+        }
+
         m_ResetParams = Academy.Instance.EnvironmentParameters;
     }
 
@@ -99,6 +151,75 @@ public class WalkerAgent : Agent
 
         //Random start rotation to help generalize
         hips.rotation = Quaternion.Euler(0, Random.Range(0.0f, 360.0f), 0);
+
+        // Read difficulty from environment parameters (Project Settings -> ML-Agents -> Environment Parameters)
+        // This allows overriding the stage via curriculum or CLI arguments.
+        // 0 = Easy, 1 = Medium, 2 = Hard, 3 = Walking
+        float difficulty = m_ResetParams.GetWithDefault("difficulty", (float)startingStage);
+        startingStage = (LearningStage)Mathf.RoundToInt(difficulty);
+
+        // Read Assist Force from Curriculum
+        // Param "assist_force" corresponds to the ratio of weight to support (0 to 1)
+        currAssistForceRatio = m_ResetParams.GetWithDefault("assist_force", currAssistForceRatio);
+
+        // Read generic curriculum value (-1 to 1)
+        float curriculumValue = m_ResetParams.GetWithDefault("curriculum_value", -1.0f);
+        // You can map this 'curriculumValue' to other parameters if needed
+
+        // Update Ground Contact Termination
+        // If we are learning to stand, we usually want to disable termination on body contact.
+        foreach (var bodyPart in m_JdController.bodyPartsList)
+        {
+            if (bodyPart.rb.transform == footL || bodyPart.rb.transform == footR)
+            {
+                // Feet should never terminate episode on ground contact
+                bodyPart.groundContact.agentDoneOnGroundContact = false;
+            }
+            else
+            {
+                bodyPart.groundContact.agentDoneOnGroundContact = terminateOnBodyPartContact;
+            }
+        }
+
+        // Apply specific stage initialization
+        switch (startingStage)
+        {
+            case LearningStage.Easy:
+                // Stage 1 (Easy): Start slightly off-balance but upright.
+                // Apply small random rotation on X/Z axes
+                hips.rotation *= Quaternion.Euler(Random.Range(-10f, 10f), 0, Random.Range(-10f, 10f));
+                break;
+            case LearningStage.Medium:
+                // Stage 2 (Medium): Start on knees.
+                // 1. Lower hips to put knees near ground (assuming ~0.5 height).
+                hips.position += new Vector3(0, -0.3f, 0);
+
+                // 2. Bend Knees: Rotate shins back significantly so agent is kneeling.
+                // Setting local rotation ensures it's relative to the thigh.
+                // -120 degrees usually folds the leg back effectively.
+                shinL.localRotation = Quaternion.Euler(120, 0, 0);
+                shinR.localRotation = Quaternion.Euler(120, 0, 0);
+                thighL.localRotation = Quaternion.Euler(Random.Range(-90f, 90f), 0, 0);
+                thighR.localRotation = Quaternion.Euler(Random.Range(-90f, 90f), 0, 0);
+
+                // 3. Tilt hips forward slightly to balance on knees
+                hips.rotation *= Quaternion.Euler(-15f, 0, 0);
+                break;
+            case LearningStage.Hard:
+                // Stage 3 (Hard): Start lying flat on the back or stomach (Ragdoll).
+                bool faceDown = Random.value > 0.5f;
+                // Rotate 90 degrees on X (face down) or -90 (face up)
+                float xRot = faceDown ? 90f : -90f;
+                hips.rotation = Quaternion.Euler(xRot, Random.Range(0.0f, 360.0f), 0);
+                // Lower hips to near ground level
+                hips.position = new Vector3(hips.position.x, 0.5f, hips.position.z);
+                break;
+            case LearningStage.Walking:
+            default:
+                // Stage 4: Walking (Standard Start)
+                // Already handled by default resets above
+                break;
+        }
 
         UpdateOrientationObjects();
 
@@ -214,44 +335,117 @@ public class WalkerAgent : Agent
 
     void FixedUpdate()
     {
+        
         UpdateOrientationObjects();
 
-        var cubeForward = m_OrientationCube.transform.forward;
+        // Calculate angle of hips relative to world up
+        float angle = Vector3.Angle(hips.up, Vector3.up);
 
-        // Set reward for this step according to mixture of the following elements.
-        // a. Match target speed
-        //This reward will approach 1 if it matches perfectly and approach zero as it deviates
-        var matchSpeedReward = GetMatchingVelocityReward(cubeForward * MTargetWalkingSpeed, GetAvgVelocity());
-
-        //Check for NaNs
-        if (float.IsNaN(matchSpeedReward))
+        // Threshold for switching behaviors (e.g., 40 degrees)
+        if (angle > 60f)
         {
-            throw new ArgumentException(
-                "NaN in moveTowardsTargetReward.\n" +
-                $" cubeForward: {cubeForward}\n" +
-                $" hips.velocity: {m_JdController.bodyPartsDict[hips].rb.linearVelocity}\n" +
-                $" maximumWalkingSpeed: {m_maxWalkingSpeed}"
-            );
+            UseRecoveryModel();
+        }
+        else if(angle < 20f)
+        {
+            UseWalkingModel();
         }
 
-        // b. Rotation alignment with target direction.
-        //This reward will approach 1 if it faces the target direction perfectly and approach zero as it deviates
-        var headForward = head.forward;
-        headForward.y = 0;
-        // var lookAtTargetReward = (Vector3.Dot(cubeForward, head.forward) + 1) * .5F;
-        var lookAtTargetReward = (Vector3.Dot(cubeForward, headForward) + 1) * .5F;
-
-        //Check for NaNs
-        if (float.IsNaN(lookAtTargetReward))
+        if (startingStage == LearningStage.Walking)
         {
-            throw new ArgumentException(
-                "NaN in lookAtTargetReward.\n" +
-                $" cubeForward: {cubeForward}\n" +
-                $" head.forward: {head.forward}"
-            );
+            var cubeForward = m_OrientationCube.transform.forward;
+
+            // Set reward for this step according to mixture of the following elements.
+            // a. Match target speed
+            //This reward will approach 1 if it matches perfectly and approach zero as it deviates
+            var matchSpeedReward = GetMatchingVelocityReward(cubeForward * MTargetWalkingSpeed, GetAvgVelocity());
+
+            //Check for NaNs
+            if (float.IsNaN(matchSpeedReward))
+            {
+                throw new ArgumentException(
+                    "NaN in moveTowardsTargetReward.\n" +
+                    $" cubeForward: {cubeForward}\n" +
+                    $" hips.velocity: {m_JdController.bodyPartsDict[hips].rb.linearVelocity}\n" +
+                    $" maximumWalkingSpeed: {m_maxWalkingSpeed}"
+                );
+            }
+
+            // b. Rotation alignment with target direction.
+            //This reward will approach 1 if it faces the target direction perfectly and approach zero as it deviates
+            var headForward = head.forward;
+            headForward.y = 0;
+            // var lookAtTargetReward = (Vector3.Dot(cubeForward, head.forward) + 1) * .5F;
+            var lookAtTargetReward = (Vector3.Dot(cubeForward, headForward) + 1) * .5F;
+
+            //Check for NaNs
+            if (float.IsNaN(lookAtTargetReward))
+            {
+                throw new ArgumentException(
+                    "NaN in lookAtTargetReward.\n" +
+                    $" cubeForward: {cubeForward}\n" +
+                    $" head.forward: {head.forward}"
+                );
+            }
+
+            AddReward(matchSpeedReward * lookAtTargetReward);
+        }
+        else
+        {
+            // Stages 1-3: Learning to Stand Up
+            // Reward needs to be strong enough to encourage lifting the body.
+
+            // 1. Head Height
+            // Reward high head position. Assume ~2m is good max height.
+            // This encourages legs to straighten.
+            float headHeight = head.position.y;
+            float heightReward = Mathf.Pow(Mathf.Clamp01(headHeight / 1.7f), 3);
+
+            // 2. Upright Alignment
+            // Use Head and Hips.
+            float hipsUp = Vector3.Dot(hips.up, Vector3.up);
+            float headUp = Vector3.Dot(head.up, Vector3.up);
+            
+            // Only reward if alignment is positive (upwards). 
+            // Lying flat (0) or upside down (<0) should yield 0 reward for this component.
+            float alignmentReward = Mathf.Max(0, hipsUp) * 0.2f + Mathf.Max(0, headUp) * 0.2f;
+
+            // Combine
+            float totalReward = (heightReward + alignmentReward) * 0.5f;
+
+            AddReward(totalReward);
+
+            // Knee Touch Penalty (Scales with Time)
+            // Check if shins are touching the ground
+            bool kneesTouching = false;
+            foreach (var bp in m_JdController.bodyPartsList)
+            {
+                if ((bp.rb.transform == thighL || bp.rb.transform == thighR) && bp.groundContact.touchingGround)
+                {
+                    kneesTouching = true;
+                    break;
+                }
+            }
+
+            if (kneesTouching)
+            {
+                // Penalty scales from 0 to maxKneeTouchPenalty based on episode progress
+                // prevention of staying on knees
+                float timeRatio = (float)StepCount / MaxStep;
+                AddReward(maxKneeTouchPenalty * timeRatio);
+            }
         }
 
-        AddReward(matchSpeedReward * lookAtTargetReward);
+        // Apply Assistive External Force (HoST Paper)
+        // Helps the agent stand up by pulling it up by the hips
+        if (currAssistForceRatio > 0)
+        {
+            // F = m * g * ratio
+            float upwardForce = m_TotalMass * Physics.gravity.magnitude * currAssistForceRatio;
+            // Apply to Hips (Center of Mass approximation)
+            var hipsRb = m_JdController.bodyPartsDict[hips].rb;
+            hipsRb.AddForce(Vector3.up * upwardForce, ForceMode.Force);
+        }
     }
 
     //Returns the average velocity of all of the body parts
@@ -289,6 +483,9 @@ public class WalkerAgent : Agent
     /// </summary>
     public void TouchedTarget()
     {
-        AddReward(1f);
+        if (startingStage == LearningStage.Walking)
+        {
+            AddReward(1f);
+        }
     }
 }

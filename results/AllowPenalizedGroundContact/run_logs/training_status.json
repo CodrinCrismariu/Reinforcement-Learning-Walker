@@ -1,0 +1,47 @@
+{
+    "Walker": {
+        "checkpoints": [
+            {
+                "steps": 499000,
+                "file_path": "results\\AllowPenalizedGroundContact\\Walker\\Walker-499000.onnx",
+                "reward": 4.549977981127226,
+                "creation_time": 1765410645.9200523,
+                "auxillary_file_paths": [
+                    "results\\AllowPenalizedGroundContact\\Walker\\Walker-499000.pt"
+                ]
+            },
+            {
+                "steps": 999000,
+                "file_path": "results\\AllowPenalizedGroundContact\\Walker\\Walker-999000.onnx",
+                "reward": null,
+                "creation_time": 1765411621.5980604,
+                "auxillary_file_paths": [
+                    "results\\AllowPenalizedGroundContact\\Walker\\Walker-999000.pt"
+                ]
+            },
+            {
+                "steps": 1026000,
+                "file_path": "results\\AllowPenalizedGroundContact\\Walker\\Walker-1026000.onnx",
+                "reward": null,
+                "creation_time": 1765411725.4439216,
+                "auxillary_file_paths": [
+                    "results\\AllowPenalizedGroundContact\\Walker\\Walker-1026000.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1026000,
+            "file_path": "results\\AllowPenalizedGroundContact\\Walker.onnx",
+            "reward": null,
+            "creation_time": 1765411725.4439216,
+            "auxillary_file_paths": [
+                "results\\AllowPenalizedGroundContact\\Walker\\Walker-1026000.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.2.2+cpu"
+    }
+}

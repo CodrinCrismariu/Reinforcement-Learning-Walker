@@ -14,3 +14,8 @@ python -m pip install mlagents==1.1.0
 Go to Window -> Package Manage -> Package Manager -> Unity Registry
 
 Seach com.unity.ml-agents and install it
+
+
+### Training
+
+mlagents-learn .\Example-Configs\ppo\Walker.yaml --run-id=2Dconstrained --resume

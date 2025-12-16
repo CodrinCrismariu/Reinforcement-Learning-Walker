@@ -1,0 +1,65 @@
+{
+    "Walker": {
+        "checkpoints": [
+            {
+                "steps": 5999926,
+                "file_path": "results\\ForceAssist_StandUp\\Walker\\Walker-5999926.onnx",
+                "reward": 327.81333364956623,
+                "creation_time": 1765499741.1819465,
+                "auxillary_file_paths": [
+                    "results\\ForceAssist_StandUp\\Walker\\Walker-5999926.pt"
+                ]
+            },
+            {
+                "steps": 6499906,
+                "file_path": "results\\ForceAssist_StandUp\\Walker\\Walker-6499906.onnx",
+                "reward": 332.1646844482422,
+                "creation_time": 1765500637.160337,
+                "auxillary_file_paths": [
+                    "results\\ForceAssist_StandUp\\Walker\\Walker-6499906.pt"
+                ]
+            },
+            {
+                "steps": 6999906,
+                "file_path": "results\\ForceAssist_StandUp\\Walker\\Walker-6999906.onnx",
+                "reward": 366.14205237279964,
+                "creation_time": 1765501529.3345087,
+                "auxillary_file_paths": [
+                    "results\\ForceAssist_StandUp\\Walker\\Walker-6999906.pt"
+                ]
+            },
+            {
+                "steps": 7499886,
+                "file_path": "results\\ForceAssist_StandUp\\Walker\\Walker-7499886.onnx",
+                "reward": 364.9382216509651,
+                "creation_time": 1765502417.8159556,
+                "auxillary_file_paths": [
+                    "results\\ForceAssist_StandUp\\Walker\\Walker-7499886.pt"
+                ]
+            },
+            {
+                "steps": 7823126,
+                "file_path": "results\\ForceAssist_StandUp\\Walker\\Walker-7823126.onnx",
+                "reward": 336.0927858352661,
+                "creation_time": 1765503041.1788487,
+                "auxillary_file_paths": [
+                    "results\\ForceAssist_StandUp\\Walker\\Walker-7823126.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 7823126,
+            "file_path": "results\\ForceAssist_StandUp\\Walker.onnx",
+            "reward": 336.0927858352661,
+            "creation_time": 1765503041.1788487,
+            "auxillary_file_paths": [
+                "results\\ForceAssist_StandUp\\Walker\\Walker-7823126.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.2.2+cpu"
+    }
+}

@@ -1,0 +1,29 @@
+{
+    "Walker": {
+        "checkpoints": [
+            {
+                "steps": 2188,
+                "file_path": "results\\RayModel\\Walker\\Walker-2188.onnx",
+                "reward": -0.6951050918442863,
+                "creation_time": 1765394685.9732938,
+                "auxillary_file_paths": [
+                    "results\\RayModel\\Walker\\Walker-2188.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 2188,
+            "file_path": "results\\RayModel\\Walker.onnx",
+            "reward": -0.6951050918442863,
+            "creation_time": 1765394685.9732938,
+            "auxillary_file_paths": [
+                "results\\RayModel\\Walker\\Walker-2188.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.2.2+cpu"
+    }
+}

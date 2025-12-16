@@ -1,0 +1,65 @@
+{
+    "Walker": {
+        "checkpoints": [
+            {
+                "steps": 999959,
+                "file_path": "results\\2Dconstrained\\Walker\\Walker-999959.onnx",
+                "reward": 23.470050616593827,
+                "creation_time": 1764627177.4518118,
+                "auxillary_file_paths": [
+                    "results\\2Dconstrained\\Walker\\Walker-999959.pt"
+                ]
+            },
+            {
+                "steps": 1159875,
+                "file_path": "results\\2Dconstrained\\Walker\\Walker-1159875.onnx",
+                "reward": 32.70053209050061,
+                "creation_time": 1764627597.3234112,
+                "auxillary_file_paths": [
+                    "results\\2Dconstrained\\Walker\\Walker-1159875.pt"
+                ]
+            },
+            {
+                "steps": 1499997,
+                "file_path": "results\\2Dconstrained\\Walker\\Walker-1499997.onnx",
+                "reward": 35.7637686882544,
+                "creation_time": 1764628522.5704842,
+                "auxillary_file_paths": [
+                    "results\\2Dconstrained\\Walker\\Walker-1499997.pt"
+                ]
+            },
+            {
+                "steps": 1999977,
+                "file_path": "results\\2Dconstrained\\Walker\\Walker-1999977.onnx",
+                "reward": 46.151232516903676,
+                "creation_time": 1764629664.9310732,
+                "auxillary_file_paths": [
+                    "results\\2Dconstrained\\Walker\\Walker-1999977.pt"
+                ]
+            },
+            {
+                "steps": 2002859,
+                "file_path": "results\\2Dconstrained\\Walker\\Walker-2002859.onnx",
+                "reward": 45.17477072278658,
+                "creation_time": 1764629740.904277,
+                "auxillary_file_paths": [
+                    "results\\2Dconstrained\\Walker\\Walker-2002859.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 2002859,
+            "file_path": "results\\2Dconstrained\\Walker.onnx",
+            "reward": 45.17477072278658,
+            "creation_time": 1764629740.904277,
+            "auxillary_file_paths": [
+                "results\\2Dconstrained\\Walker\\Walker-2002859.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.2.2+cpu"
+    }
+}

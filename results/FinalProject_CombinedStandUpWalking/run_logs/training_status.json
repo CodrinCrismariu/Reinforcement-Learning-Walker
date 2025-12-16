@@ -1,0 +1,221 @@
+{
+    "curriculum_value": {
+        "lesson_num": 4
+    },
+    "Walker": {
+        "checkpoints": [
+            {
+                "steps": 499800,
+                "file_path": "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-499800.onnx",
+                "reward": 247.19757588704428,
+                "creation_time": 1765819231.56534,
+                "auxillary_file_paths": [
+                    "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-499800.pt"
+                ]
+            },
+            {
+                "steps": 999800,
+                "file_path": "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-999800.onnx",
+                "reward": 334.2248273577009,
+                "creation_time": 1765820177.7457817,
+                "auxillary_file_paths": [
+                    "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-999800.pt"
+                ]
+            },
+            {
+                "steps": 1499800,
+                "file_path": "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-1499800.onnx",
+                "reward": 330.33867714621806,
+                "creation_time": 1765821059.0057013,
+                "auxillary_file_paths": [
+                    "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-1499800.pt"
+                ]
+            },
+            {
+                "steps": 1999800,
+                "file_path": "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-1999800.onnx",
+                "reward": 355.33751017252604,
+                "creation_time": 1765821965.6396434,
+                "auxillary_file_paths": [
+                    "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-1999800.pt"
+                ]
+            },
+            {
+                "steps": 2499800,
+                "file_path": "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-2499800.onnx",
+                "reward": 302.76745525159333,
+                "creation_time": 1765822876.356356,
+                "auxillary_file_paths": [
+                    "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-2499800.pt"
+                ]
+            },
+            {
+                "steps": 2999800,
+                "file_path": "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-2999800.onnx",
+                "reward": 242.078985463018,
+                "creation_time": 1765823820.9058933,
+                "auxillary_file_paths": [
+                    "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-2999800.pt"
+                ]
+            },
+            {
+                "steps": 3499800,
+                "file_path": "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-3499800.onnx",
+                "reward": 454.9613873517072,
+                "creation_time": 1765824768.0260813,
+                "auxillary_file_paths": [
+                    "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-3499800.pt"
+                ]
+            },
+            {
+                "steps": 3999800,
+                "file_path": "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-3999800.onnx",
+                "reward": 518.7072379819808,
+                "creation_time": 1765825692.4242566,
+                "auxillary_file_paths": [
+                    "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-3999800.pt"
+                ]
+            },
+            {
+                "steps": 4499800,
+                "file_path": "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-4499800.onnx",
+                "reward": 509.62497950962614,
+                "creation_time": 1765826671.378243,
+                "auxillary_file_paths": [
+                    "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-4499800.pt"
+                ]
+            },
+            {
+                "steps": 4999800,
+                "file_path": "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-4999800.onnx",
+                "reward": 528.5949886028583,
+                "creation_time": 1765827659.139356,
+                "auxillary_file_paths": [
+                    "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-4999800.pt"
+                ]
+            },
+            {
+                "steps": 5499800,
+                "file_path": "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-5499800.onnx",
+                "reward": 590.3533433869827,
+                "creation_time": 1765828702.0463133,
+                "auxillary_file_paths": [
+                    "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-5499800.pt"
+                ]
+            },
+            {
+                "steps": 5999800,
+                "file_path": "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-5999800.onnx",
+                "reward": 635.721334254488,
+                "creation_time": 1765829811.384267,
+                "auxillary_file_paths": [
+                    "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-5999800.pt"
+                ]
+            },
+            {
+                "steps": 6499800,
+                "file_path": "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-6499800.onnx",
+                "reward": 681.3400505664301,
+                "creation_time": 1765830987.643963,
+                "auxillary_file_paths": [
+                    "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-6499800.pt"
+                ]
+            },
+            {
+                "steps": 6999800,
+                "file_path": "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-6999800.onnx",
+                "reward": 795.6438609730113,
+                "creation_time": 1765832122.262402,
+                "auxillary_file_paths": [
+                    "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-6999800.pt"
+                ]
+            },
+            {
+                "steps": 7499800,
+                "file_path": "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-7499800.onnx",
+                "reward": 802.9549374822843,
+                "creation_time": 1765833371.7924635,
+                "auxillary_file_paths": [
+                    "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-7499800.pt"
+                ]
+            },
+            {
+                "steps": 7999800,
+                "file_path": "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-7999800.onnx",
+                "reward": 852.2713717506045,
+                "creation_time": 1765834777.709981,
+                "auxillary_file_paths": [
+                    "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-7999800.pt"
+                ]
+            },
+            {
+                "steps": 8499800,
+                "file_path": "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-8499800.onnx",
+                "reward": 881.0077997463852,
+                "creation_time": 1765835971.879119,
+                "auxillary_file_paths": [
+                    "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-8499800.pt"
+                ]
+            },
+            {
+                "steps": 8999800,
+                "file_path": "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-8999800.onnx",
+                "reward": 868.1176862045073,
+                "creation_time": 1765837112.4244807,
+                "auxillary_file_paths": [
+                    "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-8999800.pt"
+                ]
+            },
+            {
+                "steps": 9499800,
+                "file_path": "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-9499800.onnx",
+                "reward": 904.6164697265625,
+                "creation_time": 1765838145.5035698,
+                "auxillary_file_paths": [
+                    "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-9499800.pt"
+                ]
+            },
+            {
+                "steps": 9515200,
+                "file_path": "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-9515200.onnx",
+                "reward": 926.3106956481934,
+                "creation_time": 1765838176.286763,
+                "auxillary_file_paths": [
+                    "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-9515200.pt"
+                ]
+            },
+            {
+                "steps": 9999800,
+                "file_path": "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-9999800.onnx",
+                "reward": 929.4137061334426,
+                "creation_time": 1765915548.4298046,
+                "auxillary_file_paths": [
+                    "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-9999800.pt"
+                ]
+            },
+            {
+                "steps": 10003200,
+                "file_path": "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-10003200.onnx",
+                "reward": 921.7393213907877,
+                "creation_time": 1765915556.6372638,
+                "auxillary_file_paths": [
+                    "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-10003200.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 10003200,
+            "file_path": "results\\FinalProject_CombinedStandUpWalking\\Walker.onnx",
+            "reward": 921.7393213907877,
+            "creation_time": 1765915556.6372638,
+            "auxillary_file_paths": [
+                "results\\FinalProject_CombinedStandUpWalking\\Walker\\Walker-10003200.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.2.2+cpu"
+    }
+}
